@@ -1,0 +1,72 @@
+<mvc:View
+    controllerName="todo.app.controller.Table"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+>
+    <VBox class="sapUiResponsiveMargin">
+
+        <VBox class="sapUiMediumMarginBeginEnd">
+
+            <HBox justifyContent="SpaceBetween" alignItems="Center" width="100%"
+                class="sapUiSmallMargin">
+                <items>
+                    <Title text="Meine Aufgaben" />
+                    <core:Icon src="sap-icon://activity-items" />
+                </items>
+            </HBox>
+
+            <Table
+                id="todoTable"
+                noDataText="Alles erledigt!"
+                growing="true"
+                growingThreshold="20"
+                items="{todo>/todoObjekte}">
+
+                <columns>
+                    <Column width="25%">
+                        <Text text="Aufgabe" />
+                    </Column>
+                    <Column>
+                        <Text text="Beschreibung" />
+                    </Column>
+                    <Column hAlign="Center" width="10rem">
+                        <Text text="Datum" />
+                    </Column>
+                    <Column hAlign="Center" width="8rem">
+                        <Text text="Zustand" />
+                    </Column>
+                    <Column hAlign="Center" width="5rem">
+                        <Text text="Erledigt" />
+                    </Column>
+                    <Column hAlign="End" width="8rem">
+                        <Text text="Aktionen" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{todo>aufgabe}" />
+                            <Text text="{todo>beschreibung}" />
+                            <Text text="{todo>datum}" />
+                            <ObjectStatus 
+                                text="{= ${todo>erledigt} ? 'fertig' : 'offen' }" 
+                                state="{= ${todo>erledigt} ? 'Success' : 'Warning' }" />
+                            <CheckBox selected="{todo>erledigt}" select=".onCheckboxSelect" />
+                            <HBox justifyContent="End">
+                                <Button
+                                    icon="sap-icon://delete"
+                                    press=".onDelete" />
+                                <Button
+                                    icon="sap-icon://edit"
+                                    press=".onEdit" />
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+    </VBox>
+</mvc:View>

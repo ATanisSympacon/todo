@@ -1,0 +1,13 @@
+
+.customMenuButton .sapUiIcon { 
+    margin-right: 10px !important; 
+
+} 
+
+.customMenuButton .sapMBtnContent { 
+    font-weight: bold;
+} 
+
+.myCustomShellBar .sapFShellBarInnerTitle { 
+    size: 2rem !important; 
+}

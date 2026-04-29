@@ -1,0 +1,61 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog
+        title="{= ${todo>id} ? 'Aufgabe bearbeiten' : 'Neue Aufgabe' }"
+        contentWidth="400px">
+        <content>
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanL="3"
+                labelSpanM="3"
+                emptySpanL="0"
+                emptySpanM="0"
+                columnsL="1"
+                columnsM="1">
+                <f:content>
+                    <Label text="Aufgabe" />
+                    <Input 
+                        value="{todo>aufgabe}"
+                        placeholder="Was ist zu tun?"
+                        required="true" />
+
+                    <Label text="Beschreibung" />
+                    <TextArea
+                        value="{todo>beschreibung}"
+                        placeholder="Details hinzufügen..."
+                        rows="3" />
+
+                    <Label text="Datum" />
+                    <DatePicker
+                        value="{todo>datum}"
+                        valueFormat="dd-MM-yyyy"
+                        displayFormat="long"
+                        placeholder="Bis wann?" />
+
+                    <Label text="Status" />
+                    <Select
+                        width="100%"
+                        items="{todo>/zustaende}"
+                        selectedKey="{todo>status}">
+                        <core:Item
+                            key="{todo>key}"
+                            text="{todo>text}" />
+                    </Select>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button 
+                text="{= ${todo>id} ? 'Speichern' : 'Erstellen' }" 
+                type="Emphasized"
+                press=".onSave" />
+        </beginButton>
+        <endButton>
+            <Button text="Abbrechen" press=".onCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
